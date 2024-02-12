@@ -1,33 +1,22 @@
-console.log('Try npm run lint/fix!');
+import {Command} from 'commander';
+import {getPackageInfo} from './utils/get-package-infos';
 
-const longString =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut aliquet diam.';
+process.on('SIGINT', () => process.exit(0)); // eslint-disable-line
+process.on('SIGTERM', () => process.exit(0)); // eslint-disable-line
 
-const trailing = 'Semicolon';
+async function main() {
+  const packageInfo = getPackageInfo();
 
-const why = {am: 'I tabbed?'};
+  const program = new Command()
+    .name('illuzion-nextauth-lib')
+    .description('Install a premade auth system using NextAuth w/ Prisma.')
+    .version(
+      packageInfo.version || '1.0.0',
+      '-v, --version',
+      'display the version number'
+    );
 
-const iWish = "I didn't have a trailing space...";
-
-const sicilian = true;
-
-const vizzini = sicilian ? !sicilian : sicilian;
-
-const re = /foo bar/;
-
-export function doSomeStuff(
-  withThis: string,
-  andThat: string,
-  andThose: string[]
-) {
-  //function on one line
-  if (!andThose.length) {
-    return false;
-  }
-  console.log(withThis);
-  console.log(andThat);
-  console.dir(andThose);
-  console.log(longString, trailing, why, iWish, vizzini, re);
-  return;
+  program.parse();
 }
-// TODO: more examples
+
+main();
