@@ -1,0 +1,7 @@
+## Prisma Schema
+
+```
+model Account {
+
+}
+```
